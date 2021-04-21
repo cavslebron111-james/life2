@@ -1,38 +1,50 @@
 import React, { Component } from 'react';
-import {Switch,Route} from "react-router-dom";
+
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
-import Navbar from './components/Navbar';
-import Productlist from './components/Productlist';
-import Details from './components/Details';
-import Cart from './components/Cart';
-import Default from './components/Default';
-import Modal from './components/Modal';
+import Child from './Child';
 
 
 
 
 
 class App extends Component {
-  render() {
-    return (
+  constructor(props){
+    super()
+    this.state = {
+      name: "ruel"
+    }
+  console.log('constructor')
+  }
+    componentWillMount(){
+     //before rendering is component will mount
+      //we can set state in component will mount
+     
+      if(window.innerWidth < 500){
+       this.setState({innerWidth:window.innerWidth})
+     }
+     
+      console.log('component will mount')
+    }
   
-  <React.Fragment>
-     <Navbar></Navbar>
-     <Switch>
-
-      <Route exact path="/" component={Productlist}/>
-      <Route path="/Details" component={Details}/>
-      
-      <Route path="/cart" component={Cart}/>
-      
-      <Route component={Default}/>
-     
-
-
-     </Switch>
-     < Modal />
-     
+    componentDidMount(){
+      // after render is component did mount
+      console.log('component did mount')
+    }
+ 
+ 
+ 
+    render() {
+   // do not call set state in render
+    console.log('render')
+    return (
+  <div className="container">
+  <h2>life cycle mode</h2>
+  <h3>my name  is {this.state.name} innerwidth:{this.state.innerWidth}</h3>
+  <Child name ={this.state.name} />
+  
+  </div>
+  
  
  
 
@@ -42,9 +54,7 @@ class App extends Component {
 
 
 
-  </React.Fragment>
-    
-
+  
     );
   }
 }
